@@ -11,15 +11,7 @@ import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
 import org.springframework.ws.server.endpoint.annotation.RequestPayload;
 import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 import com.shopdirect.ws.xsd.accountstatus.GetCustomerAccountStatusResponse;
-import com.shopdirect.ws.xsd.accountstatus.AccountStatusRecommendations;
-import com.shopdirect.ws.xsd.accountstatus.ComLsdgWsAccountStatusAccountStatusObjectsAccountStatusRecommendations;
-import com.shopdirect.ws.xsd.accountstatus.ComLsdgWsAccountStatusAccountStatusObjectsCustStatusDetails;
-import com.shopdirect.ws.xsd.accountstatus.ComLsdgWsAccountStatusAccountStatusObjectsGetCustomerAccountStatusResponse;
-import com.shopdirect.ws.xsd.accountstatus.CustStatusDetails;
-
-import com.shopdirect.ws.xsd.accountstatus.CustomerAccountStatus;
 import com.shopdirect.ws.xsd.accountstatus.GetCustomerAccountStatus;
-import com.shopdirect.ws.xsd.accountstatus.GetCustomerAccountStatusRequest;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -31,13 +23,13 @@ public class AccountStatusController
 {
 	@PayloadRoot(namespace = "http://ws.shopdirect.com/xsd/AccountStatus", localPart = "getCustomerAccountStatus")
 	@ResponsePayload
-	public ComLsdgWsAccountStatusAccountStatusObjectsGetCustomerAccountStatusResponse callAccountStatusRestService(@RequestPayload GetCustomerAccountStatus request)
+	public GetCustomerAccountStatusResponse callAccountStatusRestService(@RequestPayload GetCustomerAccountStatus request)
 	{
 		ObjectMapper Obj = new ObjectMapper();
 		Obj.setSerializationInclusion(Include.NON_NULL);
 		String jsonInpForRest=null;  
 				//converting java to json
-		com.example.demo.entity.request.GetCustomerAccountStatus getCustomerAccountStatus=new com.example.demo.entity.request.GetCustomerAccountStatus();
+		/*com.example.demo.entity.request.GetCustomerAccountStatus getCustomerAccountStatus=new com.example.demo.entity.request.GetCustomerAccountStatus();
 		com.example.demo.entity.request.CustomerDetail customerDetail=new com.example.demo.entity.request.CustomerDetail();
 		com.example.demo.entity.request.HeaderInformation headerInformation=new com.example.demo.entity.request.HeaderInformation();
 		List<com.example.demo.entity.request.AccountStatusType> accountStatusTypeList=new ArrayList<com.example.demo.entity.request.AccountStatusType>();
@@ -60,12 +52,12 @@ public class AccountStatusController
 		customerDetail.setAccountStatusType(accountStatusTypeList);
 		}
 		getCustomerAccountStatus.setHeaderInformation(headerInformation);
-		getCustomerAccountStatus.setCustomerDetail(customerDetail);
+		getCustomerAccountStatus.setCustomerDetail(customerDetail);*/
 		
 		try { 
 			 		
             // get CustomerDetail object as a json string 
-			jsonInpForRest = Obj.writeValueAsString(getCustomerAccountStatus); 
+			jsonInpForRest = Obj.writeValueAsString(request); 
   
             // Displaying JSON String 
             System.out.println(jsonInpForRest); 
@@ -91,9 +83,9 @@ public class AccountStatusController
 		
 		
 			
-        com.example.demo.entity.response.GetCustomerAccountStatusResponse gcas=null;
+        GetCustomerAccountStatusResponse gcas=null;
         try {
-			gcas = Obj.readValue(jsonOutRest, com.example.demo.entity.response.GetCustomerAccountStatusResponse.class);
+			gcas = Obj.readValue(jsonOutRest, GetCustomerAccountStatusResponse.class);
 			
 		} catch (JsonMappingException e) {
 			// TODO Auto-generated catch block
@@ -102,7 +94,7 @@ public class AccountStatusController
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-        ComLsdgWsAccountStatusAccountStatusObjectsGetCustomerAccountStatusResponse gc=new ComLsdgWsAccountStatusAccountStatusObjectsGetCustomerAccountStatusResponse();
+        /*ComLsdgWsAccountStatusAccountStatusObjectsGetCustomerAccountStatusResponse gc=new ComLsdgWsAccountStatusAccountStatusObjectsGetCustomerAccountStatusResponse();
         CustomerAccountStatus cs=new CustomerAccountStatus();
         CustStatusDetails custStatDet=new CustStatusDetails();
         ComLsdgWsAccountStatusAccountStatusObjectsCustStatusDetails custStat=new ComLsdgWsAccountStatusAccountStatusObjectsCustStatusDetails();
@@ -153,9 +145,9 @@ public class AccountStatusController
         }
 		
 		gc.setReturnCode(gcas.getReturnCode());
-		gc.setReturnMessage(gcas.getReturnMessage());
+		gc.setReturnMessage(gcas.getReturnMessage());*/
 		
-	return gc;
+	return gcas;
 	}
 	
 	
