@@ -27,7 +27,7 @@ public class AccountStatusController
 	{
 		ObjectMapper Obj = new ObjectMapper();
 		Obj.setSerializationInclusion(Include.NON_NULL);
-		String jsonInpForRest=null;  
+		/*String jsonInpForRest=null;*/  
 				//converting java to json
 		/*com.example.demo.entity.request.GetCustomerAccountStatus getCustomerAccountStatus=new com.example.demo.entity.request.GetCustomerAccountStatus();
 		com.example.demo.entity.request.CustomerDetail customerDetail=new com.example.demo.entity.request.CustomerDetail();
@@ -54,7 +54,7 @@ public class AccountStatusController
 		getCustomerAccountStatus.setHeaderInformation(headerInformation);
 		getCustomerAccountStatus.setCustomerDetail(customerDetail);*/
 		
-		try { 
+		/*try { 
 			 		
             // get CustomerDetail object as a json string 
 			jsonInpForRest = Obj.writeValueAsString(request); 
@@ -65,14 +65,18 @@ public class AccountStatusController
   
         catch (IOException e) { 
             e.printStackTrace(); 
-        } 
+        } */
 		
 		
 		//Call the Account Status RestService
-		String REST_SERVICE_URI = "https://jsonmock-shop-project.shop-direct-group-15742-f72ef11f3ab089a8c677044eb28292cd-0001.eu-de.containers.appdomain.cloud/jsonTojson?jsonInp={jsonInpForRest}";
+		String REST_SERVICE_URI = "https://accstatuslift-shop-project.shop-direct-group-15742-f72ef11f3ab089a8c677044eb28292cd-0001.eu-de.containers.appdomain.cloud/accstatuslift/webapi/accountstatus/";
 		RestTemplate restTemplate = new RestTemplate();
 		System.out.println("Call Rest Service");
-        String jsonOutRest= restTemplate.getForObject(REST_SERVICE_URI, String.class,jsonInpForRest);
+		
+       // String jsonOutRest= restTemplate.getForObject(REST_SERVICE_URI, String.class,jsonInpForRest);
+		String jsonOutRest=restTemplate.postForObject(REST_SERVICE_URI,request,String.class);
+		System.out.println(jsonOutRest);
+		
         //System.out.println("JSON Out"+jsonOutRest);
 		
         //Convert JSON to Java and Return XML Response

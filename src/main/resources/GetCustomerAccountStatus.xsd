@@ -44,7 +44,7 @@ xmlns:tns="http://ws.shopdirect.com/xsd/AccountStatus" elementFormDefault="quali
       <xs:sequence>
 	  <xs:element name="ReturnCode" type="xs:int"/>
       <xs:element name="ReturnMessage" type="xs:string" minOccurs="0"/>
-      <xs:element name= "CustomerAccountStatus" type="tns:CustomerAccountStatus"/>
+      <xs:element name= "CustomerAccountStatus" type="tns:CustomerAccountStatus" minOccurs="0"/>
       </xs:sequence>  
     </xs:complexType>
   </xs:element>
